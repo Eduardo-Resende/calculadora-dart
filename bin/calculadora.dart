@@ -3,6 +3,7 @@ import 'dart:io';
 void main() {
   double numeroUm;
   double numeroDois;
+  String operacao;
 
   print("Digite o primeiro número: ");
   try {
@@ -10,9 +11,8 @@ void main() {
   } catch (e) {
     numeroUm = 0.0;
   }
-  
-  print("Informe a operação [ + - / * ]");
-  String operacao = stdin.readLineSync()!;
+
+  operacao = getOperacao();
 
   print("Digite o segundo número");
   try {
@@ -31,6 +31,17 @@ double subtracao(double numeroUm, double numeroDois) => numeroUm - numeroDois;
 double divisao(double numeroUm, double numeroDois) => numeroUm / numeroDois;
 
 double multiplicacao(double numeroUm, double numeroDois) => numeroUm * numeroDois;
+
+String getOperacao() {
+  List<String> operacoes = <String>["+", "-", "/", "*"];
+  print("Informe a operação ${operacoes.toString()}");
+  String operacao = stdin.readLineSync()!;
+  if (!operacoes.contains(operacao)) {
+    print("Operação inválida");
+    return getOperacao();
+  }
+  return operacao;
+}
 
 double calcular(double numeroUm, double numeroDois, String operacao) {
   double resultado = 0;
